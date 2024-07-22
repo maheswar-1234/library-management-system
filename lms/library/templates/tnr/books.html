@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<title>Book List</title>
+</head>
+<body>
+	<div class="container-fluid mt-4">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="card shadow-lg boder border-primary">
+					<div class="card-body">
+						<h4>New Book</h4>
+						<form method="post">
+							{% csrf_token %}
+							{% for i in k %}
+								{{i}}
+							{% endfor %}
+							<div class="row">
+								<div class="col">
+									<input type="reset" value="Clear" class="btn btn-outline-danger form-control">
+								</div>
+								<div class="col">
+									<input type="submit" value="Create" class="btn btn-outline-success form-control">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card shadow-lg border border-success">
+					<div class="card-body">
+						<h4>Book Details</h4>
+						<table class="table">
+							<tr>
+								<th>Book ID</th>
+								<th>Title</th>
+								<th>ISBN</th>
+								<th>Published Year</th>
+								<th>Size</th>
+								<th>Author ID</th>
+							</tr>
+							{% for i in e %}
+							<tr>
+								<td>{{forloop.counter}}</td>
+								<!--<td>{{i.bookid}}</td>-->
+								<td>{{i.title}}</td>
+								<td>{{i.isbn}}</td>
+								<td>{{i.year}}</td>
+								<td>{{i.size}}</td>
+								<td>{{i.authorid}}</td>
+								<td>
+									<div class="row">
+										<div class="col">
+											<a href="{% url 'home' %}" class="btn btn-outline-primary form-control">BACK</a>
+										</div>
+										<div class="col">
+											<a href="{% url 'bookdel' i.bookid %}" class="btn btn-outline-danger form-control">Delete</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
